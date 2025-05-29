@@ -1,8 +1,10 @@
 Flask>=2.0
 streamlit
-streamlit==1.20.0
-numpy>=1.22
 nibabel>=5.1
 plotly>=5.18
 Werkzeug>=2.0
 scikit-learn>=1.1
+numpy==1.24.4
+pandas==1.5.3
+
+
