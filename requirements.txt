@@ -1,4 +1,6 @@
 Flask>=2.0
+streamlit
+streamlit==1.20.0
 numpy>=1.22
 nibabel>=5.1
 plotly>=5.18
