@@ -1,9 +1,8 @@
-Flask>=2.0
-streamlit
-nibabel>=5.1
-plotly>=5.18
-Werkzeug>=2.0
-scikit-learn>=1.1
-numpy==1.24.4
-pandas==1.5.3
-opencv-python
+streamlit>=1.32.0
+opencv-python>=4.8.0
+nibabel>=5.1.0
+numpy>=1.24.0
+scikit-image>=0.21.0
+plotly>=5.18.0
+scipy>=1.11.0
+google-generativeai>=0.3.0 
