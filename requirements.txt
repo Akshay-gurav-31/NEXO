@@ -15,4 +15,4 @@ nibabel==5.2.1
 nilearn==0.10.2
 biopython==1.83
 pysam==0.22.0
-pyvcf==0.6.8 
+vcfpy==0.13.6 
