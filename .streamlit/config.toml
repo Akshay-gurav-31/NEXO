@@ -1,14 +1,14 @@
 [server]
 enableCORS = true
-enableXsrfProtection = true
-port = 8501
-maxUploadSize = 200
-maxMessageSize = 200
+enableXsrfProtection = false
+port = 8502
+maxUploadSize = 500
+maxMessageSize = 500
 
 [browser]
 gatherUsageStats = false
 serverAddress = "localhost"
-serverPort = 8501
+serverPort = 8502
 
 [theme]
 primaryColor = "#64ffda"
@@ -22,5 +22,5 @@ magicEnabled = true
 fastReruns = true
 
 [logger]
-level = "info"
-messageFormat = "%(asctime)s - %(message)s" 
+level = "debug"
+messageFormat = "%(asctime)s - %(levelname)s - %(message)s"
