@@ -1,0 +1,3 @@
+name: newsnx
+description: A medical and biohealth news aggregator using NewsAPI
+entry_point: main.run_newsnx
