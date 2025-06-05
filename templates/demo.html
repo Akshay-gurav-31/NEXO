@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXORA AI Demo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            background-color: #1A2A44; /* Dark navy blue background */
+            font-family: 'Inter', sans-serif;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .demo-fullscreen-iframe {
+            position: fixed;
+            top: 4cm;
+            left: 4cm;
+            width: calc(100% - 8cm);
+            height: calc(100% - 8cm);
+            border: none;
+            background-color: #000;
+            z-index: 1;
+        }
+        /* Stylish Exit Demo button - From Uiverse.io by lenfear23 */
+        .demo-exit {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            outline: none;
+            cursor: pointer;
+            width: 150px;
+            height: 50px;
+            background-image: linear-gradient(to top, #D8D9DB 0%, #fff 80%, #FDFDFD 100%);
+            border-radius: 30px;
+            border: 1px solid #8F9092;
+            transition: all 0.2s ease;
+            font-family: "Source Sans Pro", sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: #606060;
+            text-shadow: 0 1px #fff;
+            z-index: 10000;
+        }
+        
+        .demo-exit:hover {
+            box-shadow: 0 4px 3px 1px #FCFCFC, 0 6px 8px #D6D7D9, 0 -4px 4px #CECFD1, 0 -6px 4px #FEFEFE, inset 0 0 3px 3px #CECFD1;
+        }
+        
+        .demo-exit:active {
+            box-shadow: 0 4px 3px 1px #FCFCFC, 0 6px 8px #D6D7D9, 0 -4px 4px #CECFD1, 0 -6px 4px #FEFEFE, inset 0 0 5px 3px #999, inset 0 0 30px #aaa;
+        }
+        
+        .demo-exit:focus {
+            box-shadow: 0 4px 3px 1px #FCFCFC, 0 6px 8px #D6D7D9, 0 -4px 4px #CECFD1, 0 -6px 4px #FEFEFE, inset 0 0 5px 3px #999, inset 0 0 30px #aaa;
+        }
+        @media (max-width: 600px) {
+            .demo-exit { top: 12px; right: 12px; padding: 8px 18px; font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Spark animation background -->
+    <div id="spark-bg"></div>
+    
+    <!-- Store URL in hidden input field -->
+    <input type="hidden" id="homeUrl" value="{{ url_for('home') }}">
+    
+    <button class="demo-exit" onclick="goToHome();">Exit Demo</button>        
+    <iframe class="demo-fullscreen-iframe" src="https://www.youtube.com/embed/2_0rYe-4fOk?autoplay=1" allowfullscreen></iframe>
+    
+    <script>
+        // Get URL from hidden input field
+        var homeUrl = document.getElementById('homeUrl').value;
+        
+        function goToHome() {
+            window.location.assign(homeUrl);
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if(e.key === 'Escape') {
+                window.location.assign(homeUrl);
+            }
+        });
+        
+    </script>
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+<script>
+tsParticles.load("spark-bg", {
+  fullScreen: { enable: true, zIndex: 0 },
+  particles: {
+    number: { value: 180, density: { enable: true, area: 700 } },
+    color: { value: ["#3B82F6", "#1A2A44"] },
+    shape: { type: "circle" },
+    opacity: {
+      value: { min: 0.2, max: 1 },
+      random: true,
+      animation: {
+        enable: true,
+        speed: 1.5,
+        sync: false
+      }
+    },
+    size: { value: { min: 1, max: 4 }, random: true },
+    move: { 
+      enable: true,
+      speed: 1.2,
+      direction: "top",
+      random: true,
+      straight: false,
+      outModes: { default: "out" }
+    },
+    shadow: {
+      enable: true,
+      color: "#3B82F6",
+      blur: 8
+    }
+  },
+  background: { color: "transparent" },
+  detectRetina: true
+});
+    </script>
+</body>
+</html>
