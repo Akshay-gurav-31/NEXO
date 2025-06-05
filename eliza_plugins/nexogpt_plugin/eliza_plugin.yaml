@@ -1,0 +1,3 @@
+name: nexogpt
+description: A specialized medical and biohealth AI assistant using Groq API
+entry_point: main.run_nexogpt
