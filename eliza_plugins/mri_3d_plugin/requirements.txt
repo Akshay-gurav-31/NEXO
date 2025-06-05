@@ -1,0 +1,7 @@
+numpy
+nibabel
+scikit-image
+scipy
+opencv-python-headless
+plotly
+google-generativeai

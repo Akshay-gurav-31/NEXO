@@ -1,0 +1,3 @@
+name: mri_3d_plugin
+description: 3D MRI brain tumor analysis and segmentation.
+entry_point: main.run_mri_3d
