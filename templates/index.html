@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexora AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@splinetool/viewer@1.10.1/build/spline-viewer.js" type="module"></script>
+</head>
+<body>
+
+    <!-- Hamburger Menu -->
+    <div class="menu-toggle" id="menu-toggle">
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <!-- Side Navigation -->
+    <div class="side-nav" id="side-nav">
+        <div class="side-nav-header">
+            <h3>NEXORA AI</h3>
+        </div>
+        <ul class="nav-links">
+            <li class="{{ 'active' if active_page == 'home' else '' }}">
+                <a href="{{ url_for('home') }}">Home</a>
+            </li>
+            <li class="{{ 'active' if active_page == 'MRIxAI' else '' }}">
+                <a href="{{ url_for('embed', filename='1_MRIxAI') }}">MRIxAI</a>
+            </li>
+            <li class="{{ 'active' if active_page == 'Genethink AI' else '' }}">
+                <a href="{{ url_for('embed', filename='2_Genethink-AI') }}">Genethink AI</a>
+            </li>
+            <li class="{{ 'active' if active_page == 'NexoGPT' else '' }}">
+                <a href="{{ url_for('embed', filename='3_NexoGPT') }}">NexoGPT</a>
+            </li>
+            <li class="{{ 'active' if active_page == 'NewsNX' else '' }}">
+                <a href="{{ url_for('embed', filename='4_NewsNX') }}">NewsNX</a>
+            </li>
+            <li>
+                <a href="{{ url_for('demo') }}">Demo</a>
+            </li>
+            <li class="{{ 'active' if active_page == 'About' else '' }}">
+                <a href="{{ url_for('embed', filename='5_About') }}">About</a>
+            </li>
+        </ul>
+    </div>
+    
+
+    <div class="main">
+        <h1 class="header-title">NEXORA AI</h1>
+
+        <!-- 3D Viewer -->
+        <div class="spline-container">
+            <div class="spline-overlay"></div>
+            <spline-viewer 
+                url="https://prod.spline.design/1YogRjjHgL3yyNV1/scene.splinecode"
+            ></spline-viewer>
+        </div>
+        
+        <!-- Stats Section -->
+        <div class="stats-grid">
+            {% for stat in stats %}
+            <div class="stat-item">
+                <span class="stat-number">{{ stat.number }}</span>
+                <div class="stat-label">{{ stat.label }}</div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Projects Section -->
+        <div class="projects-container">
+            {% for project in projects %}
+            <div class="project-card">
+                <span class="project-icon">{{ project.icon }}</span>
+                <h2 class="project-title">{{ project.title }}</h2>
+                <p class="project-description">
+                    {{ project.description }}
+                </p>
+                <div class="features-container">
+                    {% for feature in project.features %}
+                    <span class="feature-tag">{{ feature }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Footer -->
+        <div class="footer-container">
+            <p class="footer-title">NEXORA AI QUANTUM COMPUTING DIVISION</p>
+            <p class="footer-subtitle">
+                © 2025 | Transforming healthcare through the synergy of quantum computing and artificial intelligence. Patent pending.
+            </p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<div id="spark-bg"></div>
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+<script>
+tsParticles.load("spark-bg", {
+  fullScreen: { enable: true, zIndex: 0 },
+  particles: {
+    number: { value: 180, density: { enable: true, area: 700 } },
+    color: { value: ["#3B82F6", "#1A2A44"] },
+    shape: { type: "circle" },
+    opacity: {
+      value: { min: 0.2, max: 1 },
+      random: true,
+      animation: {
+        enable: true,
+        speed: 1.5,
+        sync: false
+      }
+    },
+    size: { value: { min: 1, max: 4 }, random: true },
+    move: { 
+      enable: true,
+      speed: 1.2,
+      direction: "top",
+      random: true,
+      straight: false,
+      outModes: { default: "out" }
+    },
+    shadow: {
+      enable: true,
+      color: "#3B82F6",
+      blur: 8
+    }
+  },
+  background: { color: "transparent" },
+  detectRetina: true
+});
+</script>
+</body>
+</html>
+<div class="main-container">
+    <h1>About Nexora</h1>
+    <p>This page contains details about the Nexora project.</p>
+    <ul class="about-list">
+        <li><strong>Mission</strong>: Innovate smart home solutions.</li>
+        <li><strong>Vision</strong>: Sustainable energy monitoring.</li>
+    </ul>
+</div>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.name }} - Nexora AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://prod.spline.design/1YogRjjHgL3yyNV1/scene.splinecode" type="module"></script>
+</head>
+<body>
+    <!-- Hamburger Menu -->
+    <div class="menu-toggle" id="menu-toggle">
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    
+
+    <!-- Side Navigation -->
+    <div class="side-nav" id="side-nav">
+        <div class="side-nav-header">
+            <h3>NEXORA AI</h3>
+        </div>
+        <ul class="nav-links">
+            <li class="{{ 'active' if active_page == 'home' else '' }}">
+                <a href="{{ url_for('home') }}">Home</a>
+            </li>
+            {% for p in pages %}
+            <li class="{{ 'active' if active_page == p.route else '' }}">
+                <a href="{{ url_for('embed_page', page_file=p.file) }}">{{ p.name }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <a href="/" class="back-button">Back to Home</a>
+
+    <div class="main page-content">
+        <h1 class="page-title">{{ page.name }}</h1>
+        
+        <div class="page-container">
+            <div class="page-description">
+                <p>This is the {{ page.name }} page. In the Flask implementation, you would integrate the specific functionality from the original Streamlit page here.</p>
+                <p>Original file: {{ page.file }}</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer-container">
+            <p class="footer-title">NEXORA AI QUANTUM COMPUTING DIVISION</p>
+            <p class="footer-subtitle">
+                © 2025 | Transforming healthcare through the synergy of quantum computing and artificial intelligence. Patent pending.
+            </p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
