@@ -1,3 +1,0 @@
-name: genethink_ai
-description: A plugin that generates unique scientific hypotheses using Gemini AI
-entry_point: main.run_genethink_ai
