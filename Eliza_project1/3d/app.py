@@ -632,7 +632,7 @@ if uploaded_file:
                     col1, col2 = st.columns(2)
                     with col1:
                         max_slice_idx = volume.shape[2] - 1
-                        slice_idx = st.slider("Slice Index", 0, max_slice_idx, min( volume.shape[2] // 2, max_slice_idx))
+                        slice_idx = st.slider("Slice Index", 0, max_slice_idx, min(volume.shape[2] // 2, max_slice_idx))
                         contrast = st.slider("Contrast", 0.0, 2.0, 1.0, 0.1)
                     with col2:
                         brightness = st.slider("Brightness", -1.0, 1.0, 0.0, 0.1)
