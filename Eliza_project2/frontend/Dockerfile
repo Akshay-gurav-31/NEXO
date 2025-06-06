@@ -1,7 +1,7 @@
 FROM python:3.11-slim
 
-# Install portaudio dev library for PyAudio
-RUN apt-get update && apt-get install -y portaudio19-dev
+# Install portaudio dev library and gcc compiler for PyAudio
+RUN apt-get update && apt-get install -y portaudio19-dev gcc
 
 WORKDIR /app
 
