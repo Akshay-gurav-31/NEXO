@@ -1,14 +1,14 @@
 [server]
 enableCORS = true
 enableXsrfProtection = false
-port = 8502
+port = 8501
 maxUploadSize = 500
 maxMessageSize = 500
 
 [browser]
 gatherUsageStats = false
 serverAddress = "localhost"
-serverPort = 8502
+serverPort = 8501
 
 [theme]
 primaryColor = "#64ffda"
