@@ -1,0 +1,6 @@
+cmd = [
+    'python', '-m', 'streamlit', 'run', streamlit_script,
+    '--server.headless', 'true',
+    '--server.port', str(port),
+    '--server.address', '0.0.0.0'
+]
