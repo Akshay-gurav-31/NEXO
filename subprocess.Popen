@@ -1,6 +1,7 @@
-cmd = [
-    'python', '-m', 'streamlit', 'run', streamlit_script,
+subprocess.Popen([
+    'python', '-m', 'streamlit', 'run', 'Home.py',
     '--server.headless', 'true',
-    '--server.port', str(port),
-    '--server.address', '0.0.0.0'
-]
+    '--server.port', '8501',
+    '--server.address', '0.0.0.0',
+    '--server.runOnSave', 'false'
+], cwd=project_root)
