@@ -38,7 +38,6 @@ def get_pages():
         })
     return pages
 
-
 @app.route('/')
 def home():
     # Project data
@@ -51,7 +50,7 @@ def home():
         },
         {
             "icon": "🧬",
-            "title": "Genethink AI",  # Fixed: Changed 'Hannah' to "title"
+            "title": "Genethink AI",
             "description": "Quantum-enhanced genomics platform for precision-engineered gene editing using AI-optimized CRISPR pathways.",
             "features": ["Genomic AI", "Analysis"]
         },
@@ -66,7 +65,7 @@ def home():
     # Stats data
     stats = [
         {"number": "2", "label": "Projects"},
-        {"number": "99.99%", "label": "Qubit Fidelity"},
+        {"number": "86%", "label": "Qubit Fidelity"},
         {"number": "42μs", "label": "Processing Time"}
     ]
     
@@ -107,16 +106,16 @@ def get_page_port(filename):
         return base_port + menu_files.index(filename) + 1  # Start from 8502
     return base_port + len(menu_files) + 1
 
-def is_streamlit_running(port=8501):
+def is_streamlit_running(port):
     """Check if Streamlit server is running on the given port."""
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
         sock.settimeout(1)
-        result = sock.connect_ex(('127.0.0.1', port))
+        result = sock.connect_ex(('0.0.0.0', port))
         return result == 0
 
 @app.route('/embed/<filename>')
 def embed(filename):
-    # Convert URL filename (e.g., '1-MRIxAI') back to actual filename (e.g., '1_MRIxAI.py')
+    # Convert URL filename (e.g., '1-MRIxAI') to actual filename (e.g., '1_MRIxAI.py')
     real_filename = filename.replace('-', ' ') + '.py'
     print(f"[DEBUG] Requested filename from URL: {filename}")
     print(f"[DEBUG] Converted to real filename: {real_filename}")
@@ -137,7 +136,8 @@ def embed(filename):
         cmd = [
             'python', '-m', 'streamlit', 'run', streamlit_script,
             '--server.headless', 'true',
-            '--server.port', str(port)
+            '--server.port', str(port),
+            '--server.address', '0.0.0.0'  # Bind to 0.0.0.0 for external access
         ]
         print(f"[DEBUG] Running command: {' '.join(cmd)} in {project_root}")
         try:
@@ -165,24 +165,29 @@ def embed(filename):
     
     return render_template('embed.html', streamlit_url=streamlit_url, page_name=page_name)
 
-
 def start_streamlit():
     """Start Streamlit server for Home.py if not running."""
-    if not is_streamlit_running(8501):
+    port = os.getenv('PORT', '8501')  # Use Render's PORT
+    if not is_streamlit_running(int(port)):
         subprocess.Popen([
             'python', '-m', 'streamlit', 'run', 'Home.py',
             '--server.headless', 'true',
-            '--server.port', '8501',
+            '--server.port', port,
+            '--server.address', '0.0.0.0',  # Bind to 0.0.0.0
             '--server.runOnSave', 'false'
         ], cwd=project_root)
         for _ in range(20):
-            if is_streamlit_running(8501):
-                print("[DEBUG] Streamlit for Home.py started on port 8501")
+            if is_streamlit_running(int(port)):
+                print(f"[DEBUG] Streamlit for Home.py started on port {port}")
                 break
             time.sleep(0.5)
         else:
-            print("[ERROR] Streamlit for Home.py did not start on port 8501")
+            print(f"[ERROR] Streamlit for Home.py did not start on port {port}")
 
-# Standard Flask run block (no custom Streamlit launching needed)
+# Start Streamlit for Home.py when Flask starts
+start_streamlit()
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Use Render's PORT environment variable
+    port = int(os.getenv('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=False)  # Disable debug for production
