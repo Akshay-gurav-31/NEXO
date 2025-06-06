@@ -28,27 +28,26 @@
             <li class="{{ 'active' if active_page == 'home' else '' }}">
                 <a href="{{ url_for('home') }}">Home</a>
             </li>
-            <li class="{{ 'active' if active_page == 'MRIxAI' else '' }}">
-                <a href="{{ url_for('embed', filename='1_MRIxAI') }}">MRIxAI</a>
+            <li>
+                <a href="https://nexo-mri3d.onrender.com/" target="_blank">MRIxAI</a>
             </li>
-            <li class="{{ 'active' if active_page == 'Genethink AI' else '' }}">
-                <a href="{{ url_for('embed', filename='2_Genethink-AI') }}">Genethink AI</a>
+            <li>
+                <a href="https://nexo-1.onrender.com/" target="_blank">Genethink AI</a>
             </li>
-            <li class="{{ 'active' if active_page == 'NexoGPT' else '' }}">
-                <a href="{{ url_for('embed', filename='3_NexoGPT') }}">NexoGPT</a>
+            <li>
+                <a href="https://nexo-1.onrender.com/" target="_blank">NexoGPT</a>
             </li>
-            <li class="{{ 'active' if active_page == 'NewsNX' else '' }}">
-                <a href="{{ url_for('embed', filename='4_NewsNX') }}">NewsNX</a>
+            <li>
+                <a href="https://nexo-2.onrender.com/" target="_blank">NewsNX</a>
             </li>
             <li>
                 <a href="{{ url_for('demo') }}">Demo</a>
             </li>
-            <li class="{{ 'active' if active_page == 'About' else '' }}">
-                <a href="{{ url_for('embed', filename='5_About') }}">About</a>
+            <li>
+                <a href="https://nexo-about.onrender.com/" target="_blank">About</a>
             </li>
         </ul>
     </div>
-    
 
     <div class="main">
         <h1 class="header-title">NEXORA AI</h1>
@@ -99,39 +98,42 @@
     </div>
 
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-<div id="spark-bg"></div>
-<script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
-<script>
-tsParticles.load("spark-bg", {
-  fullScreen: { enable: true, zIndex: 0 },
-  particles: {
-    number: { value: 180, density: { enable: true, area: 700 } },
-    color: { value: ["#3B82F6", "#1A2A44"] },
-    shape: { type: "circle" },
-    opacity: {
-      value: { min: 0.2, max: 1 },
-      random: true,
-      animation: {
-        enable: true,
-        speed: 1.5,
-        sync: false
-      }
-    },
-    size: { value: { min: 1, max: 4 }, random: true },
-    move: { 
-      enable: true,
-      speed: 1.2,
-      direction: "top",
-      random: true,
-      straight: false,
-      outModes: { default: "out" }
-    },
-    shadow: {
-      enable: true,
-      color: "#3B82F6",
-      blur: 8
-    }
-  },
-  background: { color: "transparent" },
-  detectRetina: true
-});
+    <div id="spark-bg"></div>
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+    <script>
+    tsParticles.load("spark-bg", {
+      fullScreen: { enable: true, zIndex: 0 },
+      particles: {
+        number: { value: 180, density: { enable: true, area: 700 } },
+        color: { value: ["#3B82F6", "#1A2A44"] },
+        shape: { type: "circle" },
+        opacity: {
+          value: { min: 0.2, max: 1 },
+          random: true,
+          animation: {
+            enable: true,
+            speed: 1.5,
+            sync: false
+          }
+        },
+        size: { value: { min: 1, max: 4 }, random: true },
+        move: { 
+          enable: true,
+          speed: 1.2,
+          direction: "top",
+          random: true,
+          straight: false,
+          outModes: { default: "out" }
+        },
+        shadow: {
+          enable: true,
+          color: "#3B82F6",
+          blur: 8
+        }
+      },
+      background: { color: "transparent" },
+      detectRetina: true
+    });
+    </script>
+</body>
+</html>
