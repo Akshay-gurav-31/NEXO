@@ -92,20 +92,6 @@ def page(page_route):
         active_page=page_route
     )
 
-def get_page_port(filename):
-    """Assign a unique port to each page (starting at 8502)."""
-    base_port = 8501
-    menu_files = [
-        '1_MRIxAI.py',
-        '2_Genethink AI.py',
-        '3_NexoGPT.py',
-        '4_NewsNX.py',
-        '5_About.py'
-    ]
-    if filename in menu_files:
-        return base_port + menu_files.index(filename) + 1  # Start from 8502
-    return base_port + len(menu_files) + 1
-
 def is_streamlit_running(port):
     """Check if Streamlit server is running on the given port."""
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
@@ -113,81 +99,34 @@ def is_streamlit_running(port):
         result = sock.connect_ex(('0.0.0.0', port))
         return result == 0
 
-@app.route('/embed/<filename>')
-def embed(filename):
-    # Convert URL filename (e.g., '1-MRIxAI') to actual filename (e.g., '1_MRIxAI.py')
-    real_filename = filename.replace('-', ' ') + '.py'
-    print(f"[DEBUG] Requested filename from URL: {filename}")
-    print(f"[DEBUG] Converted to real filename: {real_filename}")
-    
-    # Check if the file exists in the pages directory
-    abs_streamlit_script = os.path.join(project_root, 'pages', real_filename)
-    if not os.path.exists(abs_streamlit_script):
-        print(f"[ERROR] Streamlit script does not exist: {abs_streamlit_script}")
-        return redirect(url_for('home'))
-    
-    # Assign a port for this page
-    port = get_page_port(real_filename)
-    print(f"[DEBUG] Port assigned for {real_filename}: {port}")
-    
-    # Start Streamlit if it's not running on the assigned port
-    if not is_streamlit_running(port):
-        streamlit_script = os.path.join('pages', real_filename)
-        cmd = [
-            'python', '-m', 'streamlit', 'run', streamlit_script,
-            '--server.headless', 'true',
-            '--server.port', str(port),
-            '--server.address', '0.0.0.0'  # Bind to 0.0.0.0 for external access
-        ]
-        print(f"[DEBUG] Running command: {' '.join(cmd)} in {project_root}")
-        try:
-            subprocess.Popen(cmd, cwd=project_root)
-            print(f"[DEBUG] Launched Streamlit on port {port}")
-            # Wait for Streamlit to start (max 10s)
-            for i in range(20):
-                if is_streamlit_running(port):
-                    print(f"[DEBUG] Streamlit is now running on port {port}")
-                    break
-                time.sleep(0.5)
-            else:
-                print(f"[ERROR] Streamlit did not start on port {port} after 10 seconds.")
-                return redirect(url_for('home'))
-        except Exception as e:
-            print(f"[ERROR] Failed to start Streamlit: {e}")
-            return redirect(url_for('home'))
-    else:
-        print(f"[DEBUG] Streamlit already running on port {port}")
-    
-    # Construct the Streamlit URL
-    streamlit_url = f"http://localhost:{port}"
-    page_name = real_filename.replace('.py', '')
-    print(f"[DEBUG] Streamlit URL: {streamlit_url}, Page name: {page_name}")
-    
-    return render_template('embed.html', streamlit_url=streamlit_url, page_name=page_name)
-
 def start_streamlit():
     """Start Streamlit server for Home.py if not running."""
-    port = os.getenv('PORT', '8501')  # Use Render's PORT
-    if not is_streamlit_running(int(port)):
+    port = int(os.getenv('PORT', '8501'))  # Use $PORT for Render
+    if not is_streamlit_running(port):
         subprocess.Popen([
             'python', '-m', 'streamlit', 'run', 'Home.py',
             '--server.headless', 'true',
-            '--server.port', port,
-            '--server.address', '0.0.0.0',  # Bind to 0.0.0.0
+            '--server.port', str(port),
+            '--server.address', '0.0.0.0',
             '--server.runOnSave', 'false'
         ], cwd=project_root)
         for _ in range(20):
-            if is_streamlit_running(int(port)):
+            if is_streamlit_running(port):
                 print(f"[DEBUG] Streamlit for Home.py started on port {port}")
                 break
             time.sleep(0.5)
         else:
             print(f"[ERROR] Streamlit for Home.py did not start on port {port}")
 
-# Start Streamlit for Home.py when Flask starts
+# Disable dynamic Streamlit launches for other pages (use multi-page Streamlit or separate service)
+@app.route('/embed/<filename>')
+def embed(filename):
+    # Redirect to Streamlit app (assumes Home.py handles all pages)
+    return redirect(f"/")  # Modify to point to Streamlit service if separate
+
+# Start Streamlit for Home.py
 start_streamlit()
 
 if __name__ == '__main__':
-    # Use Render's PORT environment variable
     port = int(os.getenv('PORT', 5000))
-    app.run(host='0.0.0.0', port=port, debug=False)  # Disable debug for production
+    app.run(host='0.0.0.0', port=port, debug=False)
