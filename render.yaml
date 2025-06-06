@@ -1,11 +1,6 @@
-FROM python:3.11-slim
-
-RUN apt-get update && apt-get install -y portaudio19-dev gcc
-
-WORKDIR /app
-COPY requirements.txt .
-RUN pip install -r requirements.txt
-
-COPY . .
-
-CMD ["python", "main.py"]
+services:
+  - type: web
+    name: nexo-app
+    env: docker
+    repo: https://github.com/Akshay-gurav-31/NEXO
+    branch: main
