@@ -28,6 +28,7 @@ def get_pages():
         ('NexoGPT', '3_NexoGPT.py', 'https://nexo-1.onrender.com/'),
         ('NewsNX', '4_NewsNX.py', 'https://nexo-2.onrender.com/'),
         ('About', '5_About.py', 'https://nexo-about.onrender.com/'),
+        ('Demo', 'demo', 'https://nexo-demo.onrender.com/'),  # Placeholder URL; update if needed
     ]
     pages = []
     for name, filename, url in menu_order:
@@ -36,7 +37,7 @@ def get_pages():
             'name': name,
             'route': route,
             'file': filename,
-            'url': url  # Add external URL
+            'url': url
         })
     return pages
 
