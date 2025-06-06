@@ -456,7 +456,7 @@ with st.sidebar:
         tumor_percentage_placeholder = st.empty()
     with col2:
         confidence_score_placeholder = st.empty()
-    
+
 # Updated Back to Home button with new URL
 st.markdown("""
     <input type="hidden" id="homeUrl" value="https://nexo-xadw.onrender.com/">
@@ -698,7 +698,7 @@ if uploaded_file:
                     else:
                         st.warning("Could not load hypotheses.")
                 else:
-                    st.info("Tumor details will be shown here after processing an MRI scan.")
+                    st.info("Tumor details will be shown after processing an MRI scan.")
             
             with tab4:
                 st.subheader("👨‍⚕️ AI Doctor Summary")
