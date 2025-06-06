@@ -1,0 +1,5 @@
+# Eliza_project1/3d/.streamlit/config.toml
+[server]
+port = 8501
+enableCORS = false
+headless = true
