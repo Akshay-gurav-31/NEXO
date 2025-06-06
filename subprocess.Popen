@@ -1,7 +1,13 @@
+import subprocess
+import os
+
+project_root = os.getcwd()
+port = os.getenv('PORT', '8501')  # Use Render's PORT or default to 8501
+
 subprocess.Popen([
     'python', '-m', 'streamlit', 'run', 'Home.py',
     '--server.headless', 'true',
-    '--server.port', '8501',
+    '--server.port', port,
     '--server.address', '0.0.0.0',
     '--server.runOnSave', 'false'
 ], cwd=project_root)
