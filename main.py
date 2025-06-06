@@ -86,8 +86,13 @@ def page(page_route):
     if page_info is None:
         print(f"[DEBUG] Page not found for route {page_route}, redirecting to home")
         return redirect(url_for('home'))
-    print(f"[DEBUG] Redirecting to external URL: {page_info['url']}")
-    return redirect(page_info['url'])  # Redirect to external URL
+    print(f"[DEBUG] Rendering page: {page_info}")
+    return render_template(
+        'page.html',
+        page=page_info,
+        pages=pages,
+        active_page=page_route
+    )
 
 def get_page_port(filename):
     """Assign a unique port to each page (starting at 8502)."""
