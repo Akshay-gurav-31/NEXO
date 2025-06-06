@@ -1,15 +1,11 @@
-FROM python:3.11-slim
-
-# Install portaudio dev library and gcc compiler for PyAudio
-RUN apt-get update && apt-get install -y portaudio19-dev gcc
-
-WORKDIR /app
-
-# Copy requirements.txt and install Python dependencies
+FROM python:3.11.11
+# Install PortAudio dependencies
+RUN apt-get update && apt-get install -y portaudio19-dev
+# Upgrade pip and install requirements
+RUN pip install --upgrade pip
 COPY requirements.txt .
 RUN pip install -r requirements.txt
-
-# Copy the rest of your app code
+# Copy project files
 COPY . .
-
-CMD ["python", "app.py"]   # Apne main script ka naam yahan dalna
+# Set Streamlit start command
+CMD ["python", "-m", "streamlit", "run", "app.py"]
