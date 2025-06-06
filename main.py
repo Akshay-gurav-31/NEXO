@@ -186,6 +186,7 @@ def start_streamlit():
 
 # Standard Flask run block (no custom Streamlit launching needed)
 if __name__ == '__main__':
+    start_streamlit()  # Ye add karo
     app.run(host='0.0.0.0', port=5000, debug=True)
 
 import streamlit as st
