@@ -5,6 +5,7 @@ attrs==25.3.0
 blinker==1.9.0
 cachetools==5.5.2
 gunicorn==22.0.0
+
 certifi==2025.4.26
 charset-normalizer==3.4.2
 click==8.2.1
@@ -50,7 +51,10 @@ protobuf==5.29.5
 pyarrow==20.0.0
 pyasn1==0.6.1
 pyasn1_modules==0.4.2
-PyAudio==0.2.14
+pip>=24.2
+setuptools>=74.0.0
+wheel>=0.44.0
+PyAudio==0.2.11
 pydantic==2.11.5
 pydantic_core==2.33.2
 pydeck==0.9.1
