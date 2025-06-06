@@ -26,7 +26,7 @@ def get_pages():
         ('MRIxAI', '1_MRIxAI.py', 'https://nexo-mri3d.onrender.com/'),
         ('Genethink AI', '2_Genethink AI.py', 'https://nexo-1.onrender.com/'),
         ('NexoGPT', '3_NexoGPT.py', 'https://nexo-1.onrender.com/'),
-        ('NewsNX', '4_NewsNX.py', 'https://nexo-2.onrender.com/'),
+        ('NewsNX', '4_NewsNX.py', 'https://nexo-1-3szu.onrender.com/'),
         ('About', '5_About.py', 'https://nexo-about.onrender.com/'),
         ('Demo', 'demo', 'https://nexo-demo.onrender.com/'),  # Placeholder URL; update if needed
     ]
