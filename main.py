@@ -21,24 +21,24 @@ def demo():
     return render_template('demo.html')
 
 def get_pages():
-    """Get all pages from the pages directory in desired menu order."""
+    """Get all pages with external URLs in desired menu order."""
     menu_order = [
-        ('MRIxAI', '1_MRIxAI.py'),
-        ('Genethink AI', '2_Genethink AI.py'),
-        ('NexoGPT', '3_NexoGPT.py'),
-        ('NewsNX', '4_NewsNX.py'),
-        ('About', '5_About.py'),
+        ('MRIxAI', '1_MRIxAI.py', 'https://nexo-mri3d.onrender.com/'),
+        ('Genethink AI', '2_Genethink AI.py', 'https://nexo-1.onrender.com/'),
+        ('NexoGPT', '3_NexoGPT.py', 'https://nexo-1.onrender.com/'),
+        ('NewsNX', '4_NewsNX.py', 'https://nexo-2.onrender.com/'),
+        ('About', '5_About.py', 'https://nexo-about.onrender.com/'),
     ]
     pages = []
-    for name, filename in menu_order:
+    for name, filename, url in menu_order:
         route = filename.replace(' ', '-').replace('.py', '')  # e.g., '1_MRIxAI.py' -> '1_MRIxAI'
         pages.append({
             'name': name,
             'route': route,
-            'file': filename
+            'file': filename,
+            'url': url  # Add external URL
         })
     return pages
-
 
 @app.route('/')
 def home():
@@ -52,7 +52,7 @@ def home():
         },
         {
             "icon": "🧬",
-            "title": "Genethink AI",  # Fixed: Changed 'Hannah' to "title"
+            "title": "Genethink AI",
             "description": "Quantum-enhanced genomics platform for precision-engineered gene editing using AI-optimized CRISPR pathways.",
             "features": ["Genomic AI", "Analysis"]
         },
@@ -86,13 +86,8 @@ def page(page_route):
     if page_info is None:
         print(f"[DEBUG] Page not found for route {page_route}, redirecting to home")
         return redirect(url_for('home'))
-    print(f"[DEBUG] Rendering page: {page_info}")
-    return render_template(
-        'page.html',
-        page=page_info,
-        pages=pages,
-        active_page=page_route
-    )
+    print(f"[DEBUG] Redirecting to external URL: {page_info['url']}")
+    return redirect(page_info['url'])  # Redirect to external URL
 
 def get_page_port(filename):
     """Assign a unique port to each page (starting at 8502)."""
@@ -166,7 +161,6 @@ def embed(filename):
     
     return render_template('embed.html', streamlit_url=streamlit_url, page_name=page_name)
 
-
 def start_streamlit():
     """Start Streamlit server for Home.py if not running."""
     if not is_streamlit_running(8501):
@@ -184,19 +178,6 @@ def start_streamlit():
         else:
             print("[ERROR] Streamlit for Home.py did not start on port 8501")
 
-# Standard Flask run block (no custom Streamlit launching needed)
 if __name__ == '__main__':
-    start_streamlit()  # Ye add karo
+    start_streamlit()
     app.run(host='0.0.0.0', port=5000, debug=True)
-
-import streamlit as st
-
-if st.button("Back to Home"):
-    st.markdown(
-        '<meta http-equiv="refresh" content="0; url=/" />',
-        unsafe_allow_html=True
-    )
-    
-    
-    
-    
