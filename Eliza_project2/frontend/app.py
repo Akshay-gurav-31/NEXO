@@ -176,8 +176,8 @@ with st.sidebar:
 
 # Main content area
 st.markdown("""
-    <input type="hidden" id="homeUrl" value="http://127.0.0.1:5000/">
-    <a href="http://127.0.0.1:5000/" class="back-button" style="
+    <input type="hidden" id="homeUrl" value="https://nexo-xadw.onrender.com/">
+    <a href="https://nexo-xadw.onrender.com/" class="back-button" style="
         display: inline-block;
         padding: 8px 16px;
         background-color: #4CAF50;
