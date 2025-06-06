@@ -19,4 +19,4 @@ RUN pip install --no-cache-dir --root-user-action=ignore -r requirements.txt
 EXPOSE 5000
 
 # Run Flask app with gunicorn
-CMD ["gunicorn", "--bind", "0.0.0.0:$PORT", "main:app"]
+CMD gunicorn --bind 0.0.0.0:$PORT main:app
