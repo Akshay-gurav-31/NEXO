@@ -6,6 +6,13 @@ __pycache__/
 dist/
 build/
 
+# Secret files
+.env
+.env.*
+streamlit/secrets.toml
+.streamlit/secrets.toml
+PROJECT 2/app/config.py
+
 # Environment variables
 .env
 .env.*
